@@ -52,7 +52,7 @@ public class FavoriteService {
             .collect(Collectors.toList());
     }
 
-    @CachePut(value = "favorites", key = "#loginMember.id")
+    @CacheEvict(value = "favorites", key = "#loginMember.id")
     public void deleteFavorite(LoginMember loginMember, Long id) {
         Favorite favorite = favoriteRepository.findById(id).orElseThrow(RuntimeException::new);
         if (!favorite.isCreatedBy(loginMember.getId())) {
